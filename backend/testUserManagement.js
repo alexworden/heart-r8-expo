@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./server'); // path to your server.js file
+const app = require('./app'); // path to your server.js file
 
 describe('POST /signup', () => {
   it('should create a new user and return a 200 status code', async () => {
@@ -8,7 +8,7 @@ describe('POST /signup', () => {
       .send({
         firstName: 'Test',
         lastName: 'User',
-        email: 'test@example.com',
+        emailAddress: 'test@example.com',
         password: 'password123'
       });
 

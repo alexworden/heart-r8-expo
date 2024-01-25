@@ -1,8 +1,11 @@
 class User {
-  constructor(id, username, hashedPwd, nickname, createdAt) {
+  constructor(id, emailAddress, hashedPwd, firstName, lastName, emailAddress, nickname, createdAt) {
       this.id = id;
-      this.username = username;
+      this.emailAddress = emailAddress;
       this.hashedPwd = hashedPwd;
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.emailAddress = emailAddress;
       this.nickname = nickname;
       this.createdAt = createdAt;
   }

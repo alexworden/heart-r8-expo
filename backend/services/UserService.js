@@ -1,3 +1,5 @@
+import User from '../models/User';
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('./db');
@@ -11,7 +13,7 @@ class UserService {
      * @throws Error if username already exists or database operation fails.
      * @returns a User.js instance representing the newly created user. 
      */
-    static async registerUser(tenantId, username, password, nickname = '') {
+    static async registerUser(tenantId, username, password, firstName, lastName, emailAddress, nickname = '') {
         try {
             // Check if username exists
             const userExists = await db.query('SELECT * FROM Users WHERE username = $1 AND tenant_id = $2', [username, tenantId]);
@@ -21,15 +23,15 @@ class UserService {
             
             // Hash password
             const hashedPassword = await bcrypt.hash(password, saltRounds);
-            const uuid = uuidv4();
+            const userId = uuidv4();
             const createdAt = new Date();
             // Insert new user
             const resp = await db.query(
-                'INSERT INTO Users (tenant_id, id, username, hashedPwd, nickname, created_at) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-                [tenantId, uuid, username, hashedPassword, nickname, createdAt]
+                'INSERT INTO Users (tenant_id, id, username, hashed_pwd, first_name, last_name, email_address, nickname, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
+                [tenantId, userId, username, hashedPassword, firstName, lastName, emailAddress, nickname, createdAt]
             );
             const row0 = resp.rows[0];
-            return new User(row0.id, row0.username, row0.hashed_pwd, row0.nickname, row0.created_at);
+            return new User(row0.id, row0.username, row0.hashed_pwd, row0.first_name, row0.last_name, row0.email_address,row0.nickname, row0.created_at);
         } catch (error) {
           throw new Error(`Database operation failed: ${error.message}`);
         }
@@ -48,20 +50,20 @@ class UserService {
       try {
         // Retrieve user by username
         const result = await db.query('SELECT * FROM Users WHERE username = $1 AND tenant_id = $2', [username, tenantId]);
-        const user = result.rows[0];
+        const row0 = result.rows[0];
 
-        if (!user) {
+        if (!row0) {
           throw new Error('User not found');
         }
 
         // Compare password
-        const match = await bcrypt.compare(password, user.hashedPwd);
+        const match = await bcrypt.compare(password, row0.hashedPwd);
         if (!match) {
           throw new Error('Invalid credentials');
         }
 
         // Generate JWT token
-        const token = jwt.sign({ tenantId: tenantId, userId: user.id, username: user.username }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ tenantId: tenantId, userId: row0.id, username: row0.username }, process.env.JWT_SECRET, {
           expiresIn: '1h'
         });
 

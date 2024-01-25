@@ -2,7 +2,7 @@
 CREATE TABLE Users (
     id UUID PRIMARY KEY, 
     tenant_id UUID, 
-    username VARCHAR(255) UNIQUE NOT NULL, 
+    email_address VARCHAR(255) UNIQUE NOT NULL, 
     hashed_pwd TEXT NOT NULL, 
     nickname VARCHAR(100), 
     created_at TIMESTAMP WITH TIME ZONE
