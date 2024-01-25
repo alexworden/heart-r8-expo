@@ -1,0 +1,29 @@
+The Heart-R8 App and WebSite allows users to create and share their own lists of things they love and discover new things based upon what they like and what their friends like. Users can sign-up to create a profile and then log in and share their details with friends and find other friends to connect with. 
+
+One of the initial modes of the site is the R8-It mode. In this mode, the user is presented with a random item from the database and can swipe right to indicate they like it, swipe left to indicate they don't like it, swipe down to indicate they don't care, or swipe up to indicate they don't know what it is. The user can also use a 5-star-bar to set a more accurate rating, or hit buttons for don't care or don't know. The 5-star-bar will indicate the predicted user's rating by filling in the hollow stars with a grey background. Once the user indicates their rating, only that rating will be displayed by filing in the stars in yellow. Half star values will also be supported. Users can also add comments to their rating of the item. 
+
+As the service learns more about what the user likes and dislikes and what their friends like and dislike, it will be able to make better recommendations for the user using collaborative filtering that is based upon the user's social network. 
+
+The site will also support a more traditional search mode where the user can search for items by name, category, or tag. 
+
+Another different mode will suggest items to the user based upon their location or their preference to see items that are more strongly predicted that they will like. 
+
+Users will be able to add new items by taking a picture of the item or uploading an image, and then adding a name, description, category, and tags. 
+
+Users can see ratings, items, and comments that their friends have added in a news stream. 
+
+Users can review a timeline of their ratings and comments and make edits. Edits will appear in their new stream and in the news stream of their friends.
+
+Technologies used:
+==================
+Frontend: React, Redux, CDN, Bootstrap, CSS, HTML 
+Mobile App: React Native, Expo
+Backend: Node.js, Express
+Database: Postgres, Plain SQL (no ORM), S3 (for images)
+Deployment: AWS
+
+Architecture: 
+=============
+The frontend is a React app that uses Redux for state management. The backend is a Node.js app that uses Express for routing. The database is Postgres. The mobile app is a React Native app that uses Expo for deployment. The webapp is deployed on AWS using Elastic Beanstalk. The database is deployed on AWS using RDS. The mobile app is deployed on Expo.
+
+The initial implementation of the backend will be a monolithic architecture but will define a front-end services layer, models, and a service layer that will implement persistence to the database. The models will be implemented using plain SQL. The service layer will be implemented using plain SQL. 
