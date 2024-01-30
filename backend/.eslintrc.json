@@ -1,0 +1,19 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true,
+        "node": true, // Allow Node.js global variables and Node.js scoping
+        "jest": true // Allow Jest global variables
+    },
+    "extends": "eslint:recommended",
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        // "strict": ["error", "global"], // Enforce global strict mode
+        "no-undef": "error", // Disallow undeclared variables
+        "no-var": "error", // Disallow var, encourage let/const
+        "prefer-const": "error" // Suggest const over let when variables are not reassigned
+    }
+}

@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "checkJs": false, // Disable type checking for JS files
+    "allowJs": true, // Allow JavaScript files to be included in the project
+    "target": "ES6",
+    "module": "commonjs"
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.ts", // Exclude TypeScript files if necessary
+    "**/*.tsx"
+  ]
+}

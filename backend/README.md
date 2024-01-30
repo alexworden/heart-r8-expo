@@ -21,6 +21,11 @@ git clone <repository-url>
 cd backend
 ```
 
+## Development Setup
+
+-- Install the ESLint Extension in VSCode (Cmd+Shift+X). Search for ESLint. 
+
+
 ## Install Dependencies
 
 ```
@@ -45,7 +50,10 @@ For hosted DBs, the database is created on AWS using Aurora.
 
 Log in as alexworden+aws@gmail.com and find the dev DB instance in N.California. 
 DB cluster id = heart-r8-dev1
-Master username = devmaster
+Master username = postgres
+
+You will need to download the aws-global-bundle.pem from AWS to accept their self-signed SSL certificates. 
+TODO: reference this from an environment variable path to somewhere on the local machine...
 
 ## Running the Application
 Start the server using:

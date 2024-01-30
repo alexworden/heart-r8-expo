@@ -1,2 +1,5 @@
 # macOS
 .DS_Store
+backend/combined.log
+backend/error.log
+backend/package-lock.json

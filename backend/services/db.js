@@ -1,10 +1,14 @@
+const logger = require('../utils/logger');
 const { Pool } = require('pg');
-require('dotenv').config({ path: '../.env' });
+const fs = require('fs');
+
+const caCert = fs.readFileSync('./aws-global-bundle.pem')
 
 // SSL Configuration
 const sslConfig = {
   rejectUnauthorized: false, // Important for accepting self-signed certificates
   // You can add more SSL configuration here if needed
+  ca: caCert
 };
 
 const dbConfig = {
@@ -16,11 +20,7 @@ const dbConfig = {
     ssl: sslConfig
 };
 
-/**
- * Database connection pool.
- * @type {Pool}
- * @see {@link https://github.com/brianc/node-postgres/wiki/Client#new-pool-object|Pool Documentation}
- */
+logger.debug('Connecting to database with config:', dbConfig);
 const pool = new Pool(dbConfig);
 
 module.exports = {
