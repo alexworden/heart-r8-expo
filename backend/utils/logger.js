@@ -2,6 +2,8 @@
 const winston = require('winston');
 const logLevel = process.env.LOG_LEVEL || 'info'; // Default to 'info' level
 
+console.log(`Setting log level to: ${logLevel}`);
+
 const logger = winston.createLogger({
   level: logLevel,
   format: winston.format.combine(

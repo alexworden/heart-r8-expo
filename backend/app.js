@@ -12,6 +12,7 @@ const { expressjwt: jwt } = require('express-jwt');
 const UserController = require('./controllers/UserController');
 const SubjectController = require('./controllers/SubjectController');
 const TenancyController = require('./controllers/TenancyController');
+const RatingController = require('./controllers/RatingController');
 
 const app = express();
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
@@ -52,5 +53,21 @@ app.post('/subjects/:subjectId', SubjectController.updateSubjectById);
 app.delete('/subjects/:subjectId', SubjectController.deleteSubjectById);
 // // Get next Subject to Rate for the logged in user
 // app.get('/subjects/next-to-rate', SubjectController.getNextSubjectToRateForLoggedInUser);
+
+// Rating routes
+// Create a new Rating
+app.post('/ratings', RatingController.createRating);
+// Query Ratings by subjectId, userId, startDate, endDate
+app.get('/ratings', RatingController.queryRatings);
+// Get Rating by ratingId
+app.get('/ratings/:ratingId', RatingController.getRatingById);
+// Update Rating by ratingId
+app.post('/ratings/:ratingId', RatingController.updateRatingById);
+// Delete Rating by ratingId
+app.delete('/ratings/:ratingId', RatingController.deleteRatingById);
+
+app.shutdown = async () => {
+  await TenancyController.shutdown();
+}
 
 module.exports = app;

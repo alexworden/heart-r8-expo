@@ -51,6 +51,8 @@ describe('Test Subject APIs', () => {
       .set('Authorization', `Bearer ${token}`)
       .set(TENANCY_ID_HEADER, testTenantId) // Add the header for test tenantId
       .send();
+
+    await app.shutdown();
   });
 
   it('should create a new subject by a logged in user and then update it', async () => {

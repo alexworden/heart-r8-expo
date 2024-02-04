@@ -106,6 +106,10 @@ class UserService {
     static async deleteTenancy(tenantId) {
       await db.query(`DELETE FROM Users WHERE tenant_id = $1;`, [tenantId]);
     }
+
+    static async shutdown() {
+      await db.shutdown();
+    }
 }
 
 module.exports = UserService;

@@ -16,7 +16,7 @@ DROP INDEX IF EXISTS idx_ratings_tenant_id;
 
 -- Users Table
 CREATE TABLE Users (
-    id UUID PRIMARY KEY, 
+    id TEXT PRIMARY KEY, 
     tenant_id TEXT, 
     username VARCHAR(255) NOT NULL,
     hashed_pwd TEXT NOT NULL, 
@@ -32,10 +32,10 @@ CREATE INDEX idx_users_tenant_id ON Users (tenant_id);
 
 -- Friends Table
 CREATE TABLE Friends (
-    id UUID PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     tenant_id TEXT,
-    user_id UUID, 
-    friend_id UUID, 
+    user_id TEXT, 
+    friend_id TEXT, 
     created_at TIMESTAMP WITH TIME ZONE
 );
 
@@ -45,13 +45,13 @@ CREATE INDEX idx_friends_tenant_id ON Friends (tenant_id);
 
 -- Subjects Table
 CREATE TABLE Subjects (
-    id UUID PRIMARY KEY,
+    id TEXT PRIMARY KEY,
     tenant_id TEXT,
     title TEXT,
     image_url TEXT,
     description TEXT, 
     created_at TIMESTAMP WITH TIME ZONE,
-    created_by UUID
+    created_by TEXT
 );
 
 CREATE INDEX idx_subjects_created_by ON Subjects (created_by);
@@ -59,10 +59,10 @@ CREATE INDEX idx_subjects_tenant_id ON Subjects (tenant_id);
 
 -- Ratings Table
 CREATE TABLE Ratings (
-    id UUID PRIMARY KEY,
-    tenant_id UUID,
-    user_id UUID,
-    subject_id UUID,
+    id TEXT PRIMARY KEY,
+    tenant_id TEXT,
+    user_id TEXT,
+    subject_id TEXT,
     rating_value INTEGER,
     dont_care BOOLEAN,
     dont_know BOOLEAN,

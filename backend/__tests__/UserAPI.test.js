@@ -100,5 +100,7 @@ describe('UserAPI Tests', () => {
       .set('Authorization', `Bearer ${token}`)
       .set(TENANCY_ID_HEADER, testTenantId) // Add the header for test tenantId
       .send();
+
+      await app.shutdown();
   });
 });

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const logger = require('../utils/logger');
 const { Pool } = require('pg');
 const fs = require('fs');
@@ -20,9 +21,9 @@ const dbConfig = {
     ssl: sslConfig
 };
 
-logger.debug('Connecting to database with config:', dbConfig);
 const pool = new Pool(dbConfig);
 
 module.exports = {
     query: (text, params) => pool.query(text, params),
+    shutdown: () => pool.end()
 };
